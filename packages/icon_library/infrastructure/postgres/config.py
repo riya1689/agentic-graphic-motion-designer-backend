@@ -23,12 +23,13 @@ class PostgresSettings:
 
     @classmethod
     def from_environment(cls) -> "PostgresSettings":
+        configured_url = os.getenv("ICON_LIBRARY_DATABASE_URL", "").strip()
+        shared_url = os.getenv("DATABASE_URL", "").strip()
         return cls(
             database_url=(
-                os.getenv(
-                    "ICON_LIBRARY_DATABASE_URL",
-                    "postgresql://localhost:5432/agentic_graphic_motion_designer",
-                ).strip()
+                configured_url
+                or shared_url
+                or "postgresql://localhost:5432/agentic_graphic_motion_designer"
             ),
             connect_timeout_seconds=_positive_int(
                 os.getenv("ICON_LIBRARY_DB_CONNECT_TIMEOUT", "10"), default=10

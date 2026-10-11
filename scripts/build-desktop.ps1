@@ -36,6 +36,44 @@ function Invoke-Checked {
     }
 }
 
+function Stop-LockedSidecar {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ExecutablePath
+    )
+
+    $normalizedPath = [System.IO.Path]::GetFullPath($ExecutablePath)
+    $running = @(
+        Get-Process | ForEach-Object {
+            try {
+                if ($_.Path -and ([System.IO.Path]::GetFullPath($_.Path) -ieq $normalizedPath)) {
+                    $_
+                }
+            }
+            catch {
+                # Some protected/system processes do not expose their Path.
+            }
+        }
+    )
+
+    foreach ($process in $running) {
+        Write-Host "[DESKTOP PACKAGE] Stopping running sidecar (PID $($process.Id))" -ForegroundColor Yellow
+        Stop-Process -Id $process.Id -Force -ErrorAction Stop
+    }
+
+    if ($running.Count -gt 0) {
+        Start-Sleep -Milliseconds 500
+        $stillRunning = @(
+            $running | Where-Object {
+                Get-Process -Id $_.Id -ErrorAction SilentlyContinue
+            }
+        )
+        if ($stillRunning.Count -gt 0) {
+            throw "The sidecar is still running and cannot be replaced: $ExecutablePath"
+        }
+    }
+}
+
 if (-not (Test-Path -LiteralPath $VenvPython)) {
     throw "Project venv was not found: $VenvPython"
 }
@@ -55,6 +93,7 @@ if (-not $SkipBackendRebuild) {
         throw "PyInstaller did not produce $BuiltSidecar"
     }
     New-Item -ItemType Directory -Force -Path $TauriBinaryDirectory | Out-Null
+    Stop-LockedSidecar -ExecutablePath $TauriSidecar
     Copy-Item -LiteralPath $BuiltSidecar -Destination $TauriSidecar -Force
     Write-Host "[DESKTOP PACKAGE] Sidecar staged: $TauriSidecar" -ForegroundColor Green
 }

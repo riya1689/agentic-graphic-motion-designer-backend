@@ -29,6 +29,7 @@ class AuthPostgresSettings:
             "ICON_LIBRARY_DATABASE_URL",
             "",
         ).strip()
+        shared_url = os.getenv("DATABASE_URL", "").strip()
         allowed_domains = tuple(
             domain.strip().lower().lstrip("@")
             for domain in os.getenv(
@@ -38,7 +39,7 @@ class AuthPostgresSettings:
             if domain.strip()
         )
         return cls(
-            database_url=configured_url or fallback_url,
+            database_url=configured_url or fallback_url or shared_url,
             connect_timeout_seconds=_positive_int(
                 os.getenv("AUTH_DB_CONNECT_TIMEOUT", "10"),
             ),

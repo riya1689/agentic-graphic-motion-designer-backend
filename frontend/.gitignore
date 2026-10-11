@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Production build outputs
+dist/
+dist-ssr/
+build/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+!.env.example
+!.env.*.example
+!.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vercel
+.vercel/
+
+# Tauri build artifacts (desktop)
+src-tauri/target/
+src-tauri/binaries/*.exe
+src-tauri/binaries/*.dll
+src-tauri/binaries/*.pdb
+
+# Editor / IDE configuration
+.vscode/
+.idea/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+

@@ -31,6 +31,7 @@ class ProviderSecretsPostgresSettings:
             "ICON_LIBRARY_DATABASE_URL",
             "",
         ).strip()
+        shared_url = os.getenv("DATABASE_URL", "").strip()
         providers = tuple(
             item.strip().lower()
             for item in os.getenv(
@@ -40,7 +41,7 @@ class ProviderSecretsPostgresSettings:
             if item.strip()
         )
         return cls(
-            database_url=configured_url or fallback_url,
+            database_url=configured_url or fallback_url or shared_url,
             connect_timeout_seconds=_positive_int(
                 os.getenv("AUTH_DB_CONNECT_TIMEOUT", "10")
             ),
