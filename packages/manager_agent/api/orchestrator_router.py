@@ -8,6 +8,7 @@ from uuid import uuid4
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, field_validator
+from starlette.concurrency import run_in_threadpool
 
 from packages.graphic_agent.native_svg import native_svg_path, native_svg_preview_path
 from packages.graphic_agent.system_raster import system_raster_path
@@ -51,7 +52,12 @@ def create_manager_router(
     execute_dependencies = [Depends(require_auth)] if require_auth else []
     @router.post("/execute", dependencies=execute_dependencies)
     async def execute_manager(request: ManagerExecuteRequest):
-        state = orchestrator.run(
+        # The orchestrator performs synchronous, long-running provider work.
+        # Run it outside FastAPI's event loop so Render can continue serving
+        # health checks and keep the client connection alive while planning
+        # and SVG generation are in progress.
+        state = await run_in_threadpool(
+            orchestrator.run,
             request.prompt,
             request_id=str(uuid4()),
             selected_image_model=request.selected_image_model,
