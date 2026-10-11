@@ -273,6 +273,14 @@ app.add_middleware(
         if origin.strip()
     ],
 
+    # Tauri desktop builds can use either the tauri:// scheme or the
+    # tauri.localhost HTTP origin. Allow their local ports even when
+    # Render's CORS_ALLOWED_ORIGINS variable is customized.
+    allow_origin_regex=(
+        r"^(tauri://localhost|https?://(tauri\.localhost|localhost|127\.0\.0\.1)"
+        r"(:[0-9]+)?)$"
+    ),
+
     allow_credentials=True,
 
     allow_methods=["*"],
