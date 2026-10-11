@@ -1,0 +1,38 @@
+[
+  {
+    "icon_id": "factory",
+    "name": "Factory",
+    "filename": "factory.svg",
+    "category": "Industrial",
+    "tags": ["factory", "industrial", "manufacturing", "plant"],
+    "style": "Outline",
+    "description": "Industrial factory building icon."
+  },
+  {
+    "icon_id": "robotic-arm",
+    "name": "Robotic Arm",
+    "filename": "robotic-arm.svg",
+    "category": "Automation",
+    "tags": ["robot", "robotic", "automation", "manufacturing"],
+    "style": "Outline",
+    "description": "Industrial robotic arm icon."
+  },
+  {
+    "icon_id": "conveyor",
+    "name": "Conveyor",
+    "filename": "conveyor.svg",
+    "category": "Industrial",
+    "tags": ["conveyor", "factory", "production", "automation"],
+    "style": "Outline",
+    "description": "Factory conveyor belt icon."
+  },
+  {
+    "icon_id": "gear",
+    "name": "Gear",
+    "filename": "gear.svg",
+    "category": "Automation",
+    "tags": ["gear", "settings", "engineering", "mechanical"],
+    "style": "Outline",
+    "description": "Mechanical engineering gear icon."
+  }
+]

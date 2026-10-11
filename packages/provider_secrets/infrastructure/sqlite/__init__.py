@@ -1,0 +1,2 @@
+"""SQLite provider-secret adapters."""
+

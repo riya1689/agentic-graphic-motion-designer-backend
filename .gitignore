@@ -1,0 +1,72 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!**/.env.example
+!**/.env.*.example
+
+# Tool & IDE cache directories
+.commandcode/
+.continue/
+.pi/
+.qwen/
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.tmp
+*.temp
+
+# Local application/runtime state
+data/
+runtime-data/
+logs/
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node dependencies & build outputs
+node_modules/
+dist/
+build/
+frontend/dist/
+frontend/node_modules/
+
+# Tauri generated files and packaged sidecars
+frontend/src-tauri/target/
+frontend/src-tauri/binaries/*.exe
+frontend/src-tauri/binaries/*.dll
+frontend/src-tauri/binaries/*.pdb
+
+# Python packaging/build outputs
+*.spec.bak
+*.egg-info/
+pip-wheel-metadata/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,51 @@
+{
+  "prompt_to_json_agent": {
+    "agent_id": "prompt_to_json_agent",
+    "name": "Prompt To JSON Agent",
+    "enabled": true,
+    "base_url": "http://127.0.0.1:8000",
+    "execute_path": "/api/prompt-to-json/execute",
+    "capabilities": [
+      "prompt_parsing",
+      "requirement_extraction",
+      "structured_json_generation"
+    ]
+  },
+  "planner_agent": {
+    "agent_id": "planner_agent",
+    "name": "Planner Agent",
+    "enabled": true,
+    "base_url": "http://127.0.0.1:8002",
+    "execute_path": "/api/planner/execute",
+    "capabilities": [
+      "planning",
+      "task_decomposition",
+      "task_breakdown"
+    ]
+  },
+  "graphic_agent": {
+    "agent_id": "graphic_agent",
+    "name": "Graphic Agent",
+    "enabled": true,
+    "base_url": "http://127.0.0.1:8003",
+    "execute_path": "/api/graphic/execute",
+    "capabilities": [
+      "graphic_design",
+      "poster_design",
+      "vector_design"
+    ]
+  },
+  "motion_agent": {
+    "agent_id": "motion_agent",
+    "name": "Motion Agent",
+    "enabled": true,
+    "base_url": "http://127.0.0.1:8004",
+    "execute_path": "/api/motion/execute",
+    "capabilities": [
+      "motion_design",
+      "video_generation",
+      "text_to_video",
+      "image_to_video"
+    ]
+  }
+}
