@@ -25,6 +25,7 @@ venv.bak/
 .qwen/
 .vscode/
 .idea/
+.vercel/
 
 # Logs and temporary files
 *.log
